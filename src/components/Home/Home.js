@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grow, Grid } from "@material-ui/core";
+import { Container, Grow, Grid, Typography, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getPosts } from "../../actions/posts";
@@ -12,7 +12,6 @@ export const Home = () => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
     const users = useSelector((state) => state.users);
-
 
     useEffect(() => {
         dispatch(getUsers());
@@ -38,9 +37,15 @@ export const Home = () => {
                     <Grid item xs={12} sm={7}>
                         <Posts setCurrentId={setCurrentId} currentId={currentId}/>
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Friends friends={friends} />
-                    </Grid>
+                    {user? (
+                        <Grid item xs={12} sm={4}>
+                            <Friends friends={friends} />
+                        </Grid>
+                    ):(
+                        <Paper>
+                            <Typography>Please sign in to see your friends</Typography>
+                        </Paper>
+                    )}
                 </Grid>
             </Container>
         </Grow>

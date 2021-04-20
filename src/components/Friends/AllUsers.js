@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { useSelector } from "react-redux";
+import {Button} from "@material-ui/core";
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 150 },
@@ -12,17 +13,35 @@ const columns = [
 
 
 export default function DataTable() {
+  const user = JSON.parse(localStorage.getItem('profile'));
   const users = useSelector((state) => state.users);
   const rows = [];
-  users.forEach(user => {
-    const newUser = {id: user._id, firstName: user.public.firstName, state: user.public.state, lastName: user.public.lastName, friendCount: user.public.friends.length};
-    if (!rows.includes(newUser)) {
+  const [friendsSelected, setFriendsSelected] = useState(true);
+
+  const handleRowClicked = (rowObject) => {
+    setFriendsSelected(false);
+    console.log(rowObject.data.id);
+  }
+
+  const friends = user?.result?.public.friends;
+
+  users.forEach(totalUser => {
+    const newUser = {
+      id: totalUser._id, 
+      firstName: totalUser.public.firstName, 
+      state: totalUser.public.state, 
+      lastName: totalUser.public.lastName, 
+      friendCount: totalUser.public.friends.length
+    };
+    if (!rows.includes(newUser) && !friends.includes(totalUser._id) && user?.result?._id !== totalUser._id) {
       rows.push(newUser);
     }
   });
+
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+    <div style={{ height: 400, width: '100%', backgroundColor: "white"}}>
+      <DataGrid rows={rows} columns={columns} pageSize={5} onRowSelected={(getRowId) => handleRowClicked(getRowId)}/>
+      <Button variant="contained" color="primary" disabled={friendsSelected}>Add Friend</Button>
     </div>
   );
 }

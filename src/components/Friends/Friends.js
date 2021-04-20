@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -36,8 +37,11 @@ const useStyles = makeStyles({
 
 export default function Friends({friends}) {
   const classes = useStyles();
+  const history = useHistory();
+
   function handleMore(id) {
-    console.log(friends[id]);
+    localStorage.setItem('friend', JSON.stringify(friends[id]));
+    history.push("/friend-profile");
   }
   return (
     <TableContainer component={Paper}>

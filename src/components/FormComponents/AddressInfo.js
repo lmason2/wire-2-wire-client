@@ -6,7 +6,6 @@ import React, { useState } from "react";
 const Address = ({ userData, setUserData, googleUser }) => {
     const [checkBoxValue, setCheckBoxValue] = useState(true);
     const [shipping, setShipping] = useState(true);
-    const user = JSON.parse(localStorage.getItem('profile'));
 
     const handleClick = () => {
         setCheckBoxValue((prevCheckBoxValue) => !prevCheckBoxValue);
