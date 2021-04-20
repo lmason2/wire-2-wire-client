@@ -1,12 +1,12 @@
 import React from "react";
-import { TextField, FormLabel, FormControl, MenuItem, Select, InputLabel } from "@material-ui/core";
+import { TextField, FormLabel, FormControl, MenuItem, Select, InputLabel, Typography } from "@material-ui/core";
 
 const BasicProfile = ({ userData, setUserData, googleUser }) => {
     return (
         <div>
             <div>
-                <FormLabel component="legend">Name</FormLabel>
-
+                <Typography style={{marginBottom: "10px"}}>ID:&nbsp;{userData?.result?._id}</Typography>
+                <FormLabel component="legend" style={{marginBottom: "10px"}}>Name</FormLabel>
                 {( userData?.result?.public?.firstName  ? (
                 <TextField
                     value={userData.result.public.firstName}
@@ -42,7 +42,7 @@ const BasicProfile = ({ userData, setUserData, googleUser }) => {
             </div>
             <hr></hr>
             <div>
-                <FormLabel component="legend">Email</FormLabel>
+                <FormLabel component="legend" style={{marginBottom: "10px"}}>Email</FormLabel>
                 {( userData?.result?.public?.email ? (
                     <TextField
                         value={userData.result.public.email}
@@ -64,12 +64,13 @@ const BasicProfile = ({ userData, setUserData, googleUser }) => {
             </div>
             <hr></hr>
             <div>
-                <FormLabel component="legend">State</FormLabel>
+                <FormLabel component="legend" style={{marginBottom: "10px"}}>State</FormLabel>
                 <FormControl variant="outlined" >
                     <InputLabel>State</InputLabel>
                     <Select 
                         label="State" 
                         onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, state: e.target.value }}})}
+                        style={{width: "180px"}}
                     >
                         <MenuItem value={"Alabama"}>Alabama</MenuItem>
                         <MenuItem value={"Alaska"}>Alaska</MenuItem>

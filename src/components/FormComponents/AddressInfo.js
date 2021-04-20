@@ -19,7 +19,7 @@ const Address = ({ userData, setUserData, googleUser }) => {
 
     return (
         <FormGroup>
-            <FormLabel>Primary Address</FormLabel>
+            <FormLabel style={{marginBottom: "10px"}}>Primary Address</FormLabel>
             <div>
                 { userData?.result?.private?.primaryAddress?.street ? 
                     <TextField
@@ -96,7 +96,7 @@ const Address = ({ userData, setUserData, googleUser }) => {
                 }
             </div>
             <hr></hr>
-            <FormLabel>Phone Number</FormLabel>
+            <FormLabel style={{marginBottom: "10px"}}>Phone Number</FormLabel>
             <div>
                 { userData?.result?.private?.phone  ? 
                     <TextField

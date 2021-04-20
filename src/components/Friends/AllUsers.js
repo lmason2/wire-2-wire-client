@@ -8,7 +8,8 @@ const columns = [
   { field: 'firstName', headerName: 'First Name', width: 130 },
   { field: 'lastName', headerName: 'Last Name', width: 130 },
   { field: 'state', headerName: 'State', width: 150 },
-  { field: 'friendCount', headerName: 'Friend Count', width: 150 }
+  { field: 'friendCount', headerName: 'Friend Count', width: 150 },
+  { field: 'allFields', headerName: 'Complete Account', width: 200 }
 ];
 
 
@@ -31,7 +32,8 @@ export default function DataTable() {
       firstName: totalUser.public.firstName, 
       state: totalUser.public.state, 
       lastName: totalUser.public.lastName, 
-      friendCount: totalUser.public.friends.length
+      friendCount: totalUser.public.friends.length,
+      allFields: totalUser.public.allFields
     };
     if (!rows.includes(newUser) && !friends.includes(totalUser._id) && user?.result?._id !== totalUser._id) {
       rows.push(newUser);

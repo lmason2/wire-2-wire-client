@@ -22,7 +22,7 @@ export const Home = () => {
     }, [currentId, dispatch]);
 
     const friends = [];
-    user?.result.public.friends.forEach(friend => {
+    user?.result?.public.friends.forEach(friend => {
         users.forEach(totalUser => {
             if (friend === totalUser._id) {
                 friends.push(totalUser);
