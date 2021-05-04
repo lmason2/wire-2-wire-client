@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Paper, Button, Typography } from "@material-ui/core";
+import { Paper, Button, Typography, Avatar} from "@material-ui/core";
 import RadioComp from "../FormComponents/RadioComp";
 import BasicProfile from "../FormComponents/BasicInfo";
 import CheckBoxInfo from "../FormComponents/CheckboxInfo";
@@ -20,8 +20,12 @@ const Profile = () => {
   }
   const [userData, setUserData] = useState(user);
   const [deleteAccount, setDeleteAccount] = useState(false);
+  const [needNewPic, setNeedNewPic] = useState(false);
+  const [newPicPath, setNewPicPath] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  console.log(userData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,12 +33,41 @@ const Profile = () => {
   }
 
   const handleDelete = () => {
+    console.log(user);
     setDeleteAccount(true);
+  }
+
+  const handleProfChange = (e) => {
+    setNeedNewPic(true);
+    setNewPicPath(e.target.value);
+  }
+
+  const profUpdate = () => {
+    // dispatch for profile pic update
   }
 
   return (
     <div>
-        <DeleteAlert deleteAccount={deleteAccount} setDeleteAccount={setDeleteAccount}/>
+        <DeleteAlert deleteAccount={deleteAccount} setDeleteAccount={setDeleteAccount} id={user.result._id}/>
+        <div style={{marginBottom: "20px"}}>
+          {userData.result.public.profilePic ? 
+            (
+                <Avatar aria-controls="simple-menu" aria-haspopup="true" src={userData.result.public.profilePic}></Avatar>
+            ):
+            (
+                <Avatar aria-controls="simple-menu" aria-haspopup="true" >{userData.result.public.firstName.charAt(0)}</Avatar>
+            )
+          }
+          <input 
+            type="file"
+            id="avatar" 
+            name="avatar"
+            accept="image/png, image/jpeg"
+            multiple="false"
+            onChange={handleProfChange}
+          ></input>
+          <Button color="primary" variant="contained" disabled={!needNewPic} onClick={profUpdate}>Save</Button>
+        </div>
         <form onSubmit={handleSubmit} method="post">
             <Typography>Public</Typography>
             <Paper style={{padding: "20px"}} elevation={3}>

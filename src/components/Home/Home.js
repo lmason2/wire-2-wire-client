@@ -6,12 +6,14 @@ import { getPosts } from "../../actions/posts";
 import { getUsers } from "../../actions/users";
 import Posts from "../Posts/Posts";
 import Friends from "../Friends/Friends";
+import useStyles from "./styles";
 
 export const Home = () => {
     const [currentId, setCurrentId] = useState(null);
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
     const users = useSelector((state) => state.users);
+    const classes = useStyles();
 
     useEffect(() => {
         dispatch(getUsers());
@@ -42,8 +44,8 @@ export const Home = () => {
                             <Friends friends={friends} />
                         </Grid>
                     ):(
-                        <Paper>
-                            <Typography>Please sign in to see your friends</Typography>
+                        <Paper className={classes.paper}>
+                            <Typography className={classes.mediumWriting}>Please sign in to see your friends</Typography>
                         </Paper>
                     )}
                 </Grid>

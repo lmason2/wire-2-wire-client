@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { blueGrey, deepPurple } from '@material-ui/core/colors';
+import { blueGrey, deepPurple, black } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -39,11 +39,8 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
-    marginLeft: "20px"
+    color: theme.palette.getContrastText(blueGrey[500]),
+    backgroundColor: blueGrey[500],
+    marginRight: "5px"
   },
-  toolbarMargin: {
-    marginLeft: "20px"
-  }
 }));

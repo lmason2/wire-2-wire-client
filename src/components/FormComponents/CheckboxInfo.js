@@ -9,48 +9,48 @@ const CheckBoxInfo = ({ userData, setUserData, googleUser }) => {
             <FormControlLabel 
                 control={<Checkbox 
                             name="ez" 
-                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns, easy: e.target.checked}}}})}
-                            value={userData?.result?.public?.typesOfRuns?.easy}
+                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns[0], easy: e.target.checked}}}})}
+                            checked={userData?.result?.public?.typesOfRuns[0]?.easy}
                         />} 
                 label="Easy" 
             />
             <FormControlLabel 
                 control={<Checkbox 
                             name="wo" 
-                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns, workouts: e.target.checked}}}})}
-                            value={userData?.result?.public?.typesOfRuns?.workouts}
+                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns[0], workouts: e.target.checked}}}})}
+                            checked={userData?.result?.public?.typesOfRuns[0]?.workouts}
                         />}
                 label="Workouts" 
             />
             <FormControlLabel 
                 control={<Checkbox 
                             name="lr" 
-                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns, longRun: e.target.checked}}}})}
-                            value={userData?.result?.public?.typesOfRuns?.longRun}
+                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns[0], longRun: e.target.checked}}}})}
+                            checked={userData?.result?.public?.typesOfRuns[0]?.longRun}
                         />} 
                 label="Long Runs" 
             />
             <FormControlLabel 
                 control={<Checkbox 
                             name="hill" 
-                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns, hills: e.target.checked}}}})}
-                            value={userData?.result?.public?.typesOfRuns?.hills}
+                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns[0], hills: e.target.checked}}}})}
+                            checked={userData?.result?.public?.typesOfRuns[0]?.hills}
                         />} 
                 label="Hills" 
             />
             <FormControlLabel 
                 control={<Checkbox 
                             name="flat" 
-                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns, flat: e.target.checked}}}})}
-                            value={userData?.result?.public?.typesOfRuns?.flat}
+                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns[0], flat: e.target.checked}}}})}
+                            checked={userData?.result?.public?.typesOfRuns[0]?.flat}
                         />} 
                 label="Flat" 
             />
             <FormControlLabel 
                 control={<Checkbox 
                             name="trails" 
-                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns, trails: e.target.checked}}}})}
-                            value={userData?.result?.public?.typesOfRuns?.trails}
+                            onChange={(e) => setUserData({ ...userData, result: { ...userData.result, public: {...userData.result.public, typesOfRuns: {...userData.result.public.typesOfRuns[0], trails: e.target.checked}}}})}
+                            checked={userData?.result?.public?.typesOfRuns[0]?.trails}
                         />} 
                 label="Trails" 
             />

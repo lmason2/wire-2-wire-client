@@ -4,11 +4,17 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import {
+    GoogleReCaptchaProvider,
+    GoogleReCaptcha
+  } from 'react-google-recaptcha-v3';
 
 import useStyles from "./styles";
 import Input from "./Input";
 import Icon from "./icon";
 import { signin, signup } from "../../actions/auth";
+
+import AdminLogin from "./Admin";
 
 const initialState = { firstName: "", lastName: "", email: "", password: "", confirmPassword: "" };
 
@@ -20,6 +26,8 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
     const [formData, setFormData] = useState(initialState);
+    const [isCaptchaValidated, setIsCaptchaValidated] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -27,7 +35,9 @@ const Auth = () => {
         e.preventDefault();
         
         if(isSignup) {
-            dispatch(signup(formData, history))
+            if (isCaptchaValidated) {
+                dispatch(signup(formData, history))
+            }
         }
         else {
             dispatch(signin(formData, history))
@@ -39,16 +49,26 @@ const Auth = () => {
     };
 
     const switchMode = () => {
+        setIsCaptchaValidated(false);
         setIsSignup((prevIsSignup) => !prevIsSignup);
         setShowPassword(false);
     };
+
+    const setAdmin = () => {
+        setIsAdmin(true);
+    }
 
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
 
         try {
             if(isSignup) {
-                dispatch(signup(result, history))
+                if (isCaptchaValidated) {
+                    dispatch(signup(result, history))
+                }
+                else {
+                    alert("you are a robot");
+                }
             }
             else {
                 dispatch(signin(result, history))
@@ -58,12 +78,25 @@ const Auth = () => {
         }
     };
 
+    function captchaChange() {
+        setIsCaptchaValidated(true);
+    }
+
     const googleFailure = () => {
         console.log("Google Sign In was unsuccessful. Try Aagain later");
     };
 
+    if (isAdmin) {
+        return (
+            <AdminLogin setIsAdmin={setIsAdmin} />
+        )
+    }
+
     return (
         <Container component="main" maxWidth="xs">
+            <GoogleReCaptchaProvider reCaptchaKey="6LdJSsMaAAAAAL1sJEipgkT-KqcslpaLzyTYPogC">
+                <GoogleReCaptcha onVerify={captchaChange} />
+            </GoogleReCaptchaProvider>
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
@@ -111,6 +144,13 @@ const Auth = () => {
                         <Grid item>
                             <Button onClick={switchMode}>
                                 {isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    <Grid container justify="flex-end">
+                        <Grid item>
+                            <Button onClick={setAdmin}>
+                                Admin?
                             </Button>
                         </Grid>
                     </Grid>

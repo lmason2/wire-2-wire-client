@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, FormLabel, FormControl, MenuItem, Select, InputLabel, Typography } from "@material-ui/core";
 
-const BasicProfile = ({ userData, setUserData, googleUser }) => {
+const BasicProfile = ({ userData, setUserData, googleUser, noState }) => {
     return (
         <div>
             <div>
@@ -62,8 +62,11 @@ const BasicProfile = ({ userData, setUserData, googleUser }) => {
                     )
                 )}
             </div>
+            {!noState && (
+            <>
             <hr></hr>
             <div>
+                
                 <FormLabel component="legend" style={{marginBottom: "10px"}}>State</FormLabel>
                 <FormControl variant="outlined" >
                     <InputLabel>State</InputLabel>
@@ -125,6 +128,8 @@ const BasicProfile = ({ userData, setUserData, googleUser }) => {
                     </Select>
                 </FormControl>
             </div>
+            </>
+            )}
         </div>
     )
 }

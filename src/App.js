@@ -6,11 +6,14 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import About from "./components/About/About";
-import LHome from "./components/Log/LHome/LHome";
+import LHome from "./components/LHome/LHome";
 import THome from "./components/Team/THome/THome";
 import Profile from "./components/Profile/Profile";
 import AllUsers from "./components/Friends/AllUsers";
 import FriendProfile from "./components/Friends/FriendProfile";
+import UserDash from "./components/Admin/UserDash";
+import EditProfile from "./components/Admin/EditProfile";
+import ContactUs from "./components/Contact/ContactUs";
 
 const App = () => {
     return (
@@ -26,6 +29,9 @@ const App = () => {
                     <Route path="/profile" exact component={Profile} />
                     <Route path="/allUsers" exact component={AllUsers} />
                     <Route path="/friend-profile" exact component={FriendProfile} />
+                    <Route path="/admin" exact component={UserDash} />
+                    <Route path="/edit-profile" exact component={EditProfile} />
+                    <Route path="/contact-us" exact component={ContactUs} />
                 </Switch>
             </Container>
         </BrowserRouter>

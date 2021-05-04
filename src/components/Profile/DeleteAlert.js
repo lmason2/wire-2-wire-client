@@ -7,8 +7,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
+import {deleteUser} from "../../actions/users";
 
-export default function AlertDialog({deleteAccount, setDeleteAccount}) {
+export default function AlertDialog({deleteAccount, setDeleteAccount, id, adminId}) {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -17,9 +18,15 @@ export default function AlertDialog({deleteAccount, setDeleteAccount}) {
   };
 
   const deleteAccountConfirmed = () => {
-    dispatch({ type: "LOGOUT" });
-    
-    history.push("/");
+    if (!adminId) {
+      dispatch({ type: "LOGOUT" });
+      dispatch(deleteUser(id));
+      history.push("/");
+    }
+    else {
+      dispatch(deleteUser(adminId));
+      window.location.reload();
+    }
   }
 
   return (
@@ -33,7 +40,11 @@ export default function AlertDialog({deleteAccount, setDeleteAccount}) {
         <DialogTitle id="alert-dialog-title">{"DELETING ACCOUNT (CAUTION)"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete your account?
+            {adminId ? 
+              "Are you sure you want to delete this account?"
+              :
+              "Are you sure you want to delete this account?"
+            }
           </DialogContentText>
         </DialogContent>
         <DialogActions>

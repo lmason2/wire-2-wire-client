@@ -17,6 +17,8 @@ const Navbar = () => {
     const history = useHistory();
     const location = useLocation();
 
+    console.log(user);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -56,9 +58,16 @@ const Navbar = () => {
             </div>
             <Toolbar className={classes.toolbar}>
                 <Button component={Link} to="/about" variant="contained" color="secondary">About</Button>
+                <Button style={{margin: "5px"}} component={Link} to="/contact-us" variant="contained" color="secondary">Contact Us</Button>
                 {user ? (
-                    <div className={classes.profile}>
-                        <Avatar aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} className={classes.purple}></Avatar>
+                    <div className={classes.profPic}>
+                        {user.result.public.profilePic ? 
+                        (
+                            <Avatar aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} className={classes.purple} src={user.result.public.profilePic}></Avatar>
+                        ):
+                        (
+                            <Avatar aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} className={classes.purple}>{user.result.public.firstName.charAt(0)}</Avatar>
+                        )}
                         <Menu
                             id="simple-menu"
                             anchorEl={anchorEl}
@@ -66,15 +75,15 @@ const Navbar = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            {/* <MenuItem onClick={handleClose}><Button component={Link} variant="contained" to="/log" className={classes.about} color="primary">MyLog</Button></MenuItem>
-                            <MenuItem onClick={handleClose}><Button component={Link} variant="contained" to="/teams" className={classes.about} color="primary">MyTeams</Button></MenuItem> */}
+                            <MenuItem onClick={handleClose}><Button component={Link} variant="contained" to="/log" className={classes.about} color="primary">MyLog</Button></MenuItem>
+                            {/* <MenuItem onClick={handleClose}><Button component={Link} variant="contained" to="/teams" className={classes.about} color="primary">MyTeams</Button></MenuItem> */}
                             <MenuItem onClick={handleClose}><Button component={Link} variant="contained" to="/profile" className={classes.about} color="primary">MyProfile</Button></MenuItem>
                             <MenuItem onClick={handleClose}><Button component={Link} variant="contained" to="/allUsers" className={classes.about} color="primary">AddFriends</Button></MenuItem>
                             <MenuItem onClick={handleClose}> <Button variant="contained" className={classes.about} color="secondary" onClick={logout}>Logout</Button></MenuItem>
                         </Menu>
                     </div>
                 ) : (
-                    <Button className={classes.toolbarMargin} component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+                    <Button style={{marginRight: "5px"}} className={classes.toolbarMargin} component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
                 )}
             </Toolbar>
         </AppBar>
